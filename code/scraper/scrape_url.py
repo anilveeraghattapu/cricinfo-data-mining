@@ -33,7 +33,8 @@ def get_tables(soup):
     for i, table in enumerate(tables):
         table_id = table.get('id', 'No ID')
         rows = table.find_all('tr')
-        print(f"Table {i + 1} - ID: {table_id}, Rows: {len(rows)}")
+        headers = [th.get_text(strip=True) for th in table.find_all('th')]
+        print(f"Table {i + 1} - ID: {table_id}, Rows: {len(rows)}, headers: {headers}")
 
 
 def scrape_espn(url):
