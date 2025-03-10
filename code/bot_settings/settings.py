@@ -2,8 +2,9 @@ import os
 import random
 import logging
 
-SLEEP_INTERVAL = 0
+SLEEP_INTERVAL = 10
 urls_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/urls.txt'))
+odis_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/odi.txt'))
 log_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../log/bot.log'))
 cache_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),'../../data/cached'))
 #cache_file = os.path.abspath(os.path.join(os.path.dirname(__file__),'../../data/cached/page.html'))
