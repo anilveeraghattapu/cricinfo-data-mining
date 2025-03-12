@@ -5,12 +5,12 @@ import logging
 SLEEP_INTERVAL = 10
 urls_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/urls.txt'))
 odis_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/odi.txt'))
+all_countries_odis_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/all_countries_odi.txt'))
 log_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../log/bot.log'))
 cache_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),'../../data/cached'))
-#cache_file = os.path.abspath(os.path.join(os.path.dirname(__file__),'../../data/cached/page.html'))
+
 # Ensure the logs directory exists
 os.makedirs(os.path.dirname(log_file), exist_ok=True)
-#os.makedirs(os.path, exist_ok=True)
 
 USE_LOCAL = True
 
@@ -33,7 +33,7 @@ def get_random_ua():
     return random.choice(list(ua_dict.values()))
 
 def get_urls():
-    with open(urls_file, 'r') as file:
+    with open(all_countries_odis_file, 'r') as file:
         urls = file.read().splitlines()
         
     return random.sample(urls,1)

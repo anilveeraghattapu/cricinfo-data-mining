@@ -4,9 +4,12 @@ from bs4 import BeautifulSoup
 import code.bot_settings.settings as bs 
 from urllib.parse import urljoin
 
-
+#only indian odis
 def get_url(year):
     return f'https://www.espncricinfo.com/records/year/team-match-results/{year}-{year}/one-day-internationals-2?team=6'
+
+def get_all_countries_url(year):
+    return f'https://www.espncricinfo.com/records/year/team-match-results/{year}-{year}/one-day-internationals-2'
 
 def get_page(url):
     try:
@@ -24,7 +27,8 @@ def get_page2(url=None, headers=None):
 
 def get_odi_urls(page):
     base_url = "https://www.espncricinfo.com"
-    anchors = page.find_all('a')
+    table = page.find('table')
+    anchors = table.find_all('a')
     hrefs = []
     for tag in anchors:
         if 'ODI # ' in tag.text:
@@ -34,15 +38,16 @@ def get_odi_urls(page):
     return hrefs
 
 def write_urls(urls_list):
-    with open(bs.odis_file, 'a') as file:
+    #with open(bs.odis_file, 'a') as file:
+    with open(bs.all_countries_odis_file, 'a') as file:
         for url in urls_list:
             file.write(url + '\n')
     bs.logger.info(msg=f'{len(urls_list)} URL(s) added to the list')
 
 
 def crawl_page(year):
-    url = get_url(year)
+    url = get_all_countries_url(year)
     page = get_page(url)
     urls = get_odi_urls(page)
     write_urls(urls)
-    print('crawl completed!')
+    
